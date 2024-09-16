@@ -1,7 +1,6 @@
 import './SearchBar.css'
 
 import search from '../../assets/svg/search.svg'
-import { useState } from 'react'
 
 interface SearchBarProps {
     searchText: string,

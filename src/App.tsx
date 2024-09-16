@@ -1,25 +1,55 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import './App.css'
 
 import { Reproductor } from './components/Reproductor/Reproductor'
 import { SearchBar } from './components/SearchBar/SearchBar'
 import { fetchApiDeezer } from './services/fetch'
+import { deezerFetchType } from './types/deezerTypes'
 
 function App() {
   const [search, setSearch] = useState("Prueba")
+  const [data, setData] = useState<deezerFetchType>({
+    data: [],
+    next: "string",
+    total: 2
+  })
+
+  console.log(data)
 
   const handleSetSearch = (textToSearch: string) => {
     setSearch(textToSearch)
   }
 
-  //fetchApiDeezer("taylor swift")
+  const handleSetData = (results: deezerFetchType) => {
+    setData(results)
+  }
 
-  return (
-    <>
-      <Reproductor imageUrl={'https://cdn.dribbble.com/users/108183/screenshots/2327938/media/535a615e91eccb5a744e675104db1ba1.png?resize=800x600&vertical=center'} songTitle={'Prueba'} songUrl={"https://cdn-preview-e.dzcdn.net/stream/c-e77d23e0c8ed7567a507a6d1b6a9ca1b-11.mp3"} songArtist={'Otra'}></Reproductor>
+  const prueba = useMemo(() => { handleFetch(search, handleSetData) }, [search])
+
+  if (Object.keys(data.data).length === 0 || search === "") {
+    return <>
+      <Reproductor imageUrl={"https://i.pinimg.com/originals/c1/65/8b/c1658bc18d28d7b9668cf2139b49d041.jpg"} songTitle={"Prueba"} songUrl={""} songArtist={"Otra prueba"}></Reproductor>
       <SearchBar searchText={search} handleSetSearch={handleSetSearch}></SearchBar>
     </>
-  )
+  } else {
+    return (
+      <>
+        <Reproductor imageUrl={data.data[0].album.cover_xl} songTitle={data.data[0].album.title} songUrl={data.data[0].preview} songArtist={data.data[0].artist.name}></Reproductor>
+        <SearchBar searchText={search} handleSetSearch={handleSetSearch}></SearchBar>
+      </>
+    )
+  }
+
+
 }
 
 export default App
+
+const handleFetch = async (searchText: string, handleSetData: (results: deezerFetchType) => void) => {
+  if (searchText !== "") {
+    const data = await fetchApiDeezer(searchText)
+    handleSetData(data)
+  } else {
+    console.log("No hay nada que buscar")
+  }
+}

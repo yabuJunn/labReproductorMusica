@@ -2,8 +2,11 @@ import './App.css'
 
 import { Reproductor } from './components/Reproductor/Reproductor'
 import { SearchBar } from './components/SearchBar/SearchBar'
+import { fetchApiDeezer } from './services/fetch'
 
 function App() {
+
+  fetchApiDeezer("taylor swift")
 
   return (
     <>

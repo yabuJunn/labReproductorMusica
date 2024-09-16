@@ -13,8 +13,6 @@ interface ReproductorProps {
 
 export const Reproductor = ({ imageUrl, songTitle, songArtist, songUrl }: ReproductorProps) => {
 
-    console.log("Hola")
-
     return <>
         <div id="reproductor">
             <div id='reproductorImagen'>

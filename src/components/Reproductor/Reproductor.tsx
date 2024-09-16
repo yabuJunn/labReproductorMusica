@@ -1,22 +1,31 @@
 import './Reproductor.css'
 
+import { AudioReproductor } from '../AudioReproductor/AudioControls'
+import { AudioControls } from '../AudioControls/AudioControls'
+
 interface ReproductorProps {
     imageUrl: string,
     songTitle: string,
+    songArtist: string,
     songUrl: string
 }
 
 
-export const Reproductor = ({ imageUrl, songTitle, songUrl }: ReproductorProps) => {
+export const Reproductor = ({ imageUrl, songTitle, songArtist, songUrl }: ReproductorProps) => {
 
     console.log("Hola")
 
     return <>
         <div id="reproductor">
-            <h1>{songTitle}</h1>
-            <audio controls>
-                <source src={songUrl} type="audio/mpeg" />
-            </audio>
+            <div id='reproductorImagen'>
+                <img src={imageUrl} alt="" />
+            </div>
+            <div id='reproductorTexto'>
+                <h1>{songTitle}</h1>
+                <h2>{songArtist}</h2>
+                <AudioReproductor songUrl={songUrl}></AudioReproductor>
+                <AudioControls></AudioControls>
+            </div>
         </div>
     </>
 }

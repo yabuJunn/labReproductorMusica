@@ -57,7 +57,6 @@ function App() {
       <SearchBar searchText={search} handleSetSearch={handleSetSearch}></SearchBar>
     </>
   } else {
-    // console.log(data.data[0].album.title, data.data[0].preview)
     return (
       <>
         <Reproductor imageUrl={data.data[0].album.cover_xl} songTitle={data.data[0].album.title} songUrl={data.data[0].preview} songArtist={data.data[0].artist.name} isPlaying={playing} handlePlaying={handlePlaying}></Reproductor>

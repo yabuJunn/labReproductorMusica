@@ -10,14 +10,16 @@ interface SearchBarProps {
 export const SearchBar = ({ searchText, handleSetSearch }: SearchBarProps) => {
 
     const handleChange: React.ChangeEventHandler<HTMLInputElement> = async (e) => {
-        console.log(e.target.value)
-        handleSetSearch(e.target.value)
+        setTimeout(() => {
+            console.log(e.target.value)
+            handleSetSearch(e.target.value)
+        }, 2500);
     }
 
     return <>
         <div id='SearchBar'>
             <img src={search} alt="" />
-            <input type="text" placeholder='Buscar una canción' value={searchText} onChange={handleChange} />
+            <input type="text" placeholder='Buscar una canción' onChange={handleChange} />
         </div>
     </>
 }

@@ -7,19 +7,26 @@ import play from '../../assets/svg/play.svg'
 
 interface AudioControlsProps {
     isPlaying: boolean,
-    handlePlaying: () => void
+    handlePlaying: () => void,
+    handlePlayingSongId: (action: string) => void
 }
 
-export const AudioControls = ({ isPlaying, handlePlaying }: AudioControlsProps) => {
+export const AudioControls = ({ isPlaying, handlePlaying, handlePlayingSongId }: AudioControlsProps) => {
 
     const handlePlayButton = () => {
         handlePlaying()
     }
 
+    const handleNextPreviusButtons = (e: React.MouseEvent<HTMLButtonElement>, action: string) => {
+        handlePlayingSongId(action)
+    }
+
     if (isPlaying) {
         return <>
-            <div id='buttonControlers'>
-                <button>
+            <div id='buttonControlers' >
+                <button onClick={(e) => {
+                    handleNextPreviusButtons(e, "previous")
+                }}>
                     <img src={fastRewind} alt="" />
                 </button>
 
@@ -27,7 +34,9 @@ export const AudioControls = ({ isPlaying, handlePlaying }: AudioControlsProps) 
                     <img src={pause} alt="" />
                 </button>
 
-                <button>
+                <button onClick={(e) => {
+                    handleNextPreviusButtons(e, "next")
+                }}>
                     <img src={fastFoward} alt="" />
                 </button>
             </div>
@@ -35,7 +44,9 @@ export const AudioControls = ({ isPlaying, handlePlaying }: AudioControlsProps) 
     } else {
         return <>
             <div id='buttonControlers'>
-                <button>
+                <button onClick={(e) => {
+                    handleNextPreviusButtons(e, "previous")
+                }}>
                     <img src={fastRewind} alt="" />
                 </button>
 
@@ -43,7 +54,9 @@ export const AudioControls = ({ isPlaying, handlePlaying }: AudioControlsProps) 
                     <img src={play} alt="" />
                 </button>
 
-                <button>
+                <button onClick={(e) => {
+                    handleNextPreviusButtons(e, "next")
+                }}>
                     <img src={fastFoward} alt="" />
                 </button>
             </div>

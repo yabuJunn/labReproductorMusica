@@ -3,7 +3,8 @@ import './AudioReproductor.css'
 
 interface AudioReproductorProps {
     songUrl: string,
-    isPlaying: boolean
+    isPlaying: boolean,
+
 }
 
 

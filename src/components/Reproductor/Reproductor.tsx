@@ -9,11 +9,12 @@ interface ReproductorProps {
     songArtist: string,
     songUrl: string,
     isPlaying: boolean,
-    handlePlaying: () => void
+    handlePlaying: () => void,
+    handlePlayingSongId: (action: string) => void
 }
 
 
-export const Reproductor = ({ imageUrl, songTitle, songArtist, songUrl, isPlaying, handlePlaying }: ReproductorProps) => {
+export const Reproductor = ({ imageUrl, songTitle, songArtist, songUrl, isPlaying, handlePlaying, handlePlayingSongId }: ReproductorProps) => {
     return <>
         <div id="reproductor">
             <div id='reproductorImagen'>
@@ -22,8 +23,8 @@ export const Reproductor = ({ imageUrl, songTitle, songArtist, songUrl, isPlayin
             <div id='reproductorTexto'>
                 <h1>{songTitle}</h1>
                 <h2>{songArtist}</h2>
-                <AudioReproductor songUrl={songUrl} isPlaying={isPlaying}></AudioReproductor>
-                <AudioControls handlePlaying={handlePlaying} isPlaying={isPlaying}></AudioControls>
+                <AudioReproductor songUrl={songUrl} isPlaying={isPlaying} ></AudioReproductor>
+                <AudioControls handlePlaying={handlePlaying} isPlaying={isPlaying} handlePlayingSongId={handlePlayingSongId}></AudioControls>
             </div>
         </div>
     </>

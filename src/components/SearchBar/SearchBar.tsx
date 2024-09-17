@@ -7,7 +7,7 @@ interface SearchBarProps {
     handleSetSearch: (textToSearch: string) => void
 }
 
-export const SearchBar = ({ searchText, handleSetSearch }: SearchBarProps) => {
+export const SearchBar = ({ searchText, handleSetSearch}: SearchBarProps) => {
 
     const handleChange: React.ChangeEventHandler<HTMLInputElement> = async (e) => {
         setTimeout(() => {

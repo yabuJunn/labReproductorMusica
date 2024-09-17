@@ -18,8 +18,6 @@ function App() {
   const [playing, setPlaying] = useState(true)
 
   const [searchedSongs, setSearchedSongs] = useState<arrayDeezer>([])
-  console.log(searchedSongs)
-
 
   const handleSetSearch = (textToSearch: string) => {
     setSearch(textToSearch)
@@ -28,6 +26,8 @@ function App() {
   const handleSetData = (results: deezerFetchType) => {
     setData(results)
   }
+
+  const [playingSongId, setPlayingSongId] = useState(0)
 
   const handlePlaying = () => {
     setPlaying((prev) => {
@@ -49,17 +49,36 @@ function App() {
     })
   }
 
+  const handlePlayingSongId = (action: string) => {
+    switch (action) {
+      case "next":
+        setPlayingSongId((prevPlayingSongId) => {
+          return prevPlayingSongId + 1
+        })
+        break;
+      case "previous":
+        setPlayingSongId((prevPlayingSongId) => {
+          return prevPlayingSongId - 1
+        })
+        break;
+      default:
+        break;
+    }
+  }
+
   useMemo(async () => { await handleFetch(search, handleSetData, handleSearchedSongs) }, [search])
+
+  console.log(playingSongId)
 
   if (Object.keys(data.data).length === 0 || search === "") {
     return <>
-      <Reproductor imageUrl={"https://i.pinimg.com/originals/c1/65/8b/c1658bc18d28d7b9668cf2139b49d041.jpg"} songTitle={"Busca una cancion"} songUrl={""} songArtist={"En la barra de busqueda de abajo"} isPlaying={playing} handlePlaying={handlePlaying}></Reproductor>
+      <Reproductor imageUrl={"https://i.pinimg.com/originals/c1/65/8b/c1658bc18d28d7b9668cf2139b49d041.jpg"} songTitle={"Busca una cancion"} songUrl={""} songArtist={"En la barra de busqueda de abajo"} isPlaying={playing} handlePlaying={handlePlaying} handlePlayingSongId={handlePlayingSongId}></Reproductor>
       <SearchBar searchText={search} handleSetSearch={handleSetSearch}></SearchBar>
     </>
   } else {
     return (
       <>
-        <Reproductor imageUrl={data.data[0].album.cover_xl} songTitle={data.data[0].album.title} songUrl={data.data[0].preview} songArtist={data.data[0].artist.name} isPlaying={playing} handlePlaying={handlePlaying}></Reproductor>
+        <Reproductor imageUrl={searchedSongs[playingSongId].album.cover_xl} songTitle={searchedSongs[playingSongId].album.title} songUrl={searchedSongs[playingSongId].preview} songArtist={searchedSongs[playingSongId].artist.name} isPlaying={playing} handlePlaying={handlePlaying} handlePlayingSongId={handlePlayingSongId}></Reproductor>
         <SearchBar searchText={search} handleSetSearch={handleSetSearch}></SearchBar>
       </>
     )

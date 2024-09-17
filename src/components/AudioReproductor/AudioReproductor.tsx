@@ -4,11 +4,11 @@ import './AudioReproductor.css'
 interface AudioReproductorProps {
     songUrl: string,
     isPlaying: boolean,
-
+    playingSongId: number
 }
 
 
-export const AudioReproductor = ({ songUrl, isPlaying}: AudioReproductorProps) => {
+export const AudioReproductor = ({ songUrl, isPlaying, playingSongId }: AudioReproductorProps) => {
     const [render, setRender] = useState(true)
 
     const audioRef = useRef<HTMLAudioElement | null>(null)
@@ -24,7 +24,7 @@ export const AudioReproductor = ({ songUrl, isPlaying}: AudioReproductorProps) =
         return () => {
             setRender(false)
         }
-    }, [songUrl])
+    }, [songUrl, playingSongId])
 
     useEffect(() => {
 

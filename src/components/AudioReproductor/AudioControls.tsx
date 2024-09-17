@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from 'react'
 import './AudioReproductor.css'
 
 interface AudioReproductorProps {
-    songUrl: string
+    songUrl: string,
+    isPlaying: boolean
 }
 
 
-export const AudioReproductor = ({ songUrl }: AudioReproductorProps) => {
+export const AudioReproductor = ({ songUrl, isPlaying}: AudioReproductorProps) => {
     const [render, setRender] = useState(true)
-    
+
     const audioRef = useRef<HTMLAudioElement | null>(null)
 
     useEffect(() => {
@@ -23,6 +24,19 @@ export const AudioReproductor = ({ songUrl }: AudioReproductorProps) => {
             setRender(false)
         }
     }, [songUrl])
+
+    useEffect(() => {
+
+        if (audioRef.current) {
+            if (isPlaying) {
+                audioRef.current.play()
+            } else {
+                audioRef.current.pause()
+
+            }
+        }
+
+    }, [isPlaying])
 
     if (!songUrl) {
         return null

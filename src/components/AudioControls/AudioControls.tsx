@@ -13,7 +13,6 @@ interface AudioControlsProps {
 export const AudioControls = ({ isPlaying, handlePlaying }: AudioControlsProps) => {
 
     const handlePlayButton = () => {
-        console.log("Play")
         handlePlaying()
     }
 

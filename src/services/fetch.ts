@@ -1,3 +1,5 @@
+import { deezerFetchType } from "../types/deezerTypes"
+
 export const fetchApiDeezer = async (search: string) => {
     console.log("Prueba fetch")
 
@@ -8,7 +10,7 @@ export const fetchApiDeezer = async (search: string) => {
         }
     })
 
-    const responseJson = await response.json()
+    const responseJson: deezerFetchType = await response.json()
 
     return responseJson
 

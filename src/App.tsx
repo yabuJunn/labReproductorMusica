@@ -4,7 +4,7 @@ import './App.css'
 import { Reproductor } from './components/Reproductor/Reproductor'
 import { SearchBar } from './components/SearchBar/SearchBar'
 import { fetchApiDeezer } from './services/fetch'
-import { deezerFetchType } from './types/deezerTypes'
+import { arrayDeezer, dataDeezerType, deezerFetchType } from './types/deezerTypes'
 
 function App() {
   const [search, setSearch] = useState("")
@@ -17,7 +17,9 @@ function App() {
 
   const [playing, setPlaying] = useState(true)
 
-  console.log(data)
+  const [searchedSongs, setSearchedSongs] = useState<arrayDeezer>([])
+  console.log(searchedSongs)
+
 
   const handleSetSearch = (textToSearch: string) => {
     setSearch(textToSearch)
@@ -27,7 +29,7 @@ function App() {
     setData(results)
   }
 
-  const handlePlaying = (changePlaying: boolean) => {
+  const handlePlaying = () => {
     setPlaying((prev) => {
       if (prev) {
         return false
@@ -38,7 +40,16 @@ function App() {
     })
   }
 
-  useMemo(async () => { await handleFetch(search, handleSetData) }, [search])
+  const handleSearchedSongs = (newSong: dataDeezerType) => {
+    setSearchedSongs((prevSearchedSongs) => {
+      return [
+        ...prevSearchedSongs,
+        newSong
+      ]
+    })
+  }
+
+  useMemo(async () => { await handleFetch(search, handleSetData, handleSearchedSongs) }, [search])
 
   if (Object.keys(data.data).length === 0 || search === "") {
     return <>
@@ -60,11 +71,13 @@ function App() {
 
 export default App
 
-const handleFetch = async (searchText: string, handleSetData: (results: deezerFetchType) => void) => {
+const handleFetch = async (searchText: string, handleSetData: (results: deezerFetchType) => void, handleSearchedSongs: (newSong: dataDeezerType) => void) => {
   if (searchText !== "") {
     const data = await fetchApiDeezer(searchText)
 
     handleSetData(data)
+
+    handleSearchedSongs(data.data[0])
 
   } else {
     console.log("No hay nada que buscar")

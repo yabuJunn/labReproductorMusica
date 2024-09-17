@@ -4,7 +4,7 @@ export interface deezerFetchType {
     total: number
 }
 
-interface dataDeezerType {
+export interface dataDeezerType {
     album: {
         cover: string,
         cover_big: string,
@@ -44,3 +44,5 @@ interface dataDeezerType {
     title_version: string,
     type: string
 }
+
+export type arrayDeezer = Array<dataDeezerType>

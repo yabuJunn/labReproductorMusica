@@ -19,6 +19,12 @@ function App() {
 
   const [searchedSongs, setSearchedSongs] = useState<arrayDeezer>([])
 
+  //Intento de quitar la cancion duplicada
+
+  // if (searchedSongs.length !== 0 && searchedSongs.length !== 1) {
+  //   console.log(searchedSongs.splice(searchedSongs.length - 1, 1))
+  // }
+
   const handleSetSearch = (textToSearch: string) => {
     setSearch(textToSearch)
   }
@@ -53,12 +59,29 @@ function App() {
     switch (action) {
       case "next":
         setPlayingSongId((prevPlayingSongId) => {
-          return prevPlayingSongId + 1
+          if (searchedSongs.length === 0) {
+            return 0
+          } else {
+            if (searchedSongs.length === playingSongId + 1) {
+              return prevPlayingSongId
+            } else {
+              return prevPlayingSongId + 1
+            }
+          }
+
         })
         break;
       case "previous":
         setPlayingSongId((prevPlayingSongId) => {
-          return prevPlayingSongId - 1
+          if (searchedSongs.length === 0) {
+            return 0
+          } else {
+            if (playingSongId === 0) {
+              return prevPlayingSongId
+            } else {
+              return prevPlayingSongId - 1
+            }
+          }
         })
         break;
       default:
@@ -68,7 +91,9 @@ function App() {
 
   useMemo(async () => { await handleFetch(search, handleSetData, handleSearchedSongs) }, [search])
 
-  console.log(playingSongId)
+  console.log("Playing song id: ", playingSongId)
+
+  console.log("Searched songs: ", searchedSongs)
 
   if (Object.keys(data.data).length === 0 || search === "") {
     return <>

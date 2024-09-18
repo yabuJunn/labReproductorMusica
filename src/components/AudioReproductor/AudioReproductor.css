@@ -1,0 +1,40 @@
+audio {
+    margin-top: 25px;
+}
+
+/* Oculta todos los controles */
+/* audio::-webkit-media-controls-enclosure {
+    overflow: hidden;
+    width: 100%;
+    height: 20px;
+} */
+
+/* Define la altura de la barra de progreso */
+
+
+/* Oculta el botón de reproducción/pausa */
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-timeline-container {
+    display: none;
+}
+
+/* Oculta los controles de volumen */
+/* audio::-webkit-media-controls-volume-slider,
+audio::-webkit-media-controls-mute-button {
+    display: none;
+} */
+
+/* Oculta los controles de tiempo (tiempo transcurrido/restante) */
+/* audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display {
+    display: none;
+} */
+
+/* Mantén visible solo la barra de progreso */
+audio::-webkit-media-controls-timeline,
+audio::-webkit-media-controls-timeline-container {
+    /* width: 100%;
+    height: 100%; */
+
+    z-index: 10;
+}

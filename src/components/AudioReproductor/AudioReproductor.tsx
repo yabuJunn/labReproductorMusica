@@ -13,6 +13,15 @@ export const AudioReproductor = ({ songUrl, isPlaying, playingSongId }: AudioRep
 
     const audioRef = useRef<HTMLAudioElement | null>(null)
 
+    // if (audioRef.current) {
+    //     audioRef.current.addEventListener('timeupdate', () => {
+    //         if (audioRef.current) {
+    //             const progressPercent = (audioRef.current.currentTime / audioRef.current.duration) * 100;
+    //             progress.style.width = `${progressPercent}%`;
+    //         }
+    //     });
+    // }
+
     useEffect(() => {
         setRender(true)
         if (audioRef.current) {

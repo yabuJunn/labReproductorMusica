@@ -11,11 +11,13 @@ interface ReproductorProps {
     isPlaying: boolean,
     handlePlaying: () => void,
     handlePlayingSongId: (action: string) => void,
-    playingSongId: number
+    playingSongId: number,
+    deleteSong: (songIndex: number) => void,
+    handleSetPlaying: (newPlayingState: boolean) => void
 }
 
 
-export const Reproductor = ({ imageUrl, songTitle, songArtist, songUrl, isPlaying, handlePlaying, handlePlayingSongId, playingSongId }: ReproductorProps) => {
+export const Reproductor = ({ imageUrl, songTitle, songArtist, songUrl, isPlaying, handlePlaying, handlePlayingSongId, playingSongId, deleteSong, handleSetPlaying }: ReproductorProps) => {
     return <>
         <div id="reproductor">
             <div id='reproductorImagen'>
@@ -25,7 +27,7 @@ export const Reproductor = ({ imageUrl, songTitle, songArtist, songUrl, isPlayin
                 <h1>{songTitle}</h1>
                 <h2>{songArtist}</h2>
                 <AudioReproductor songUrl={songUrl} isPlaying={isPlaying} playingSongId={playingSongId} ></AudioReproductor>
-                <AudioControls handlePlaying={handlePlaying} isPlaying={isPlaying} handlePlayingSongId={handlePlayingSongId}></AudioControls>
+                <AudioControls handlePlaying={handlePlaying} isPlaying={isPlaying} handlePlayingSongId={handlePlayingSongId} deleteSong={deleteSong} playingSongId={playingSongId} handleSetPlaying={handleSetPlaying}></AudioControls>
             </div>
         </div>
     </>

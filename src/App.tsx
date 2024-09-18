@@ -46,6 +46,10 @@ function App() {
     })
   }
 
+  const handleSetPlaying = (newPlayingState: boolean) => {
+    setPlaying(newPlayingState)
+  }
+
   const handleSearchedSongs = (newSong: dataDeezerType) => {
     setSearchedSongs((prevSearchedSongs) => {
       return [
@@ -53,6 +57,21 @@ function App() {
         newSong
       ]
     })
+  }
+
+  const handleDeleteSong = (songIndex: number) => {
+    console.log("length: ", searchedSongs.length)
+    if (searchedSongs.length === 1) {
+      setSearchedSongs([])
+      setSearch("")
+      console.log("Kawabonga")
+    } else {
+      searchedSongs.splice(songIndex, 1)
+
+      setSearchedSongs(searchedSongs)
+
+      console.log("length after: ", searchedSongs.length)
+    }
   }
 
   const handlePlayingSongId = (action: string) => {
@@ -84,6 +103,14 @@ function App() {
           }
         })
         break;
+
+      case "delete":
+        if (playingSongId - 1 === -1) {
+          setPlayingSongId(0)
+        } else {
+          setPlayingSongId(playingSongId - 1)
+        }
+        break;
       default:
         break;
     }
@@ -95,15 +122,17 @@ function App() {
 
   console.log("Searched songs: ", searchedSongs)
 
+  console.log("Searched text: ", search)
+
   if (Object.keys(data.data).length === 0 || search === "") {
     return <>
-      <Reproductor imageUrl={"https://i.pinimg.com/originals/c1/65/8b/c1658bc18d28d7b9668cf2139b49d041.jpg"} songTitle={"Busca una cancion"} songUrl={""} songArtist={"En la barra de busqueda de abajo"} isPlaying={playing} handlePlaying={handlePlaying} handlePlayingSongId={handlePlayingSongId} playingSongId={playingSongId}></Reproductor>
+      <Reproductor imageUrl={"https://i.pinimg.com/originals/c1/65/8b/c1658bc18d28d7b9668cf2139b49d041.jpg"} songTitle={"Busca una cancion"} songUrl={""} songArtist={"En la barra de busqueda de abajo"} isPlaying={playing} handlePlaying={handlePlaying} handlePlayingSongId={handlePlayingSongId} playingSongId={playingSongId} deleteSong={handleDeleteSong} handleSetPlaying={handleSetPlaying}></Reproductor>
       <SearchBar searchText={search} handleSetSearch={handleSetSearch}></SearchBar>
     </>
   } else {
     return (
       <>
-        <Reproductor imageUrl={searchedSongs[playingSongId].album.cover_xl} songTitle={searchedSongs[playingSongId].album.title} songUrl={searchedSongs[playingSongId].preview} songArtist={searchedSongs[playingSongId].artist.name} isPlaying={playing} handlePlaying={handlePlaying} handlePlayingSongId={handlePlayingSongId} playingSongId={playingSongId}></Reproductor>
+        <Reproductor imageUrl={searchedSongs[playingSongId].album.cover_xl} songTitle={searchedSongs[playingSongId].album.title} songUrl={searchedSongs[playingSongId].preview} songArtist={searchedSongs[playingSongId].artist.name} isPlaying={playing} handlePlaying={handlePlaying} handlePlayingSongId={handlePlayingSongId} playingSongId={playingSongId} deleteSong={handleDeleteSong} handleSetPlaying={handleSetPlaying}></Reproductor>
         <SearchBar searchText={search} handleSetSearch={handleSetSearch}></SearchBar>
       </>
     )

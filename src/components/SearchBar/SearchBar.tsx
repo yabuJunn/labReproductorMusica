@@ -13,17 +13,19 @@ export const SearchBar = ({ searchText, handleSetSearch }: SearchBarProps) => {
     const searchRef = useRef<HTMLInputElement | null>(null)
 
     const handleChange: React.ChangeEventHandler<HTMLInputElement> = async (e) => {
+        e.preventDefault()
         setTimeout(() => {
             handleSetSearch(e.target.value)
-
         }, 2500);
     }
 
 
     return <>
-        <div id='SearchBar'>
-            <img src={search} alt="" />
-            <input type="text" placeholder='Buscar una canción' onInput={handleChange} ref={searchRef} />
+        <div id='SearchBarContainer'>
+            <div id='SearchBar'>
+                <img src={search} alt="" />
+                <input type="text" placeholder='Buscar una canción' onInput={handleChange} ref={searchRef} />
+            </div>
         </div>
     </>
 }

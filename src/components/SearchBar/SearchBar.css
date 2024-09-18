@@ -1,3 +1,27 @@
-#SearchBar {
+#SearchBarContainer {
     background-color: black;
+    margin-top: 20px;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#SearchBar {
+    display: flex;
+
+    background-color: white;
+    border-radius: 12px;
+
+    height: 32px;
+    width: 300px;
+
+    margin: 10px;
+}
+
+#SearchBar input {
+    border: none;
+    border-radius: 12px;
+    width: 100%;
 }

@@ -124,15 +124,15 @@ function App() {
 
   console.log("Searched text: ", search)
 
-  if (Object.keys(data.data).length === 0 || search === "") {
+  if (Object.keys(searchedSongs).length === 0 || search === "") {
     return <>
-      <Reproductor imageUrl={"https://i.pinimg.com/originals/c1/65/8b/c1658bc18d28d7b9668cf2139b49d041.jpg"} songTitle={"Busca una cancion"} songUrl={""} songArtist={"En la barra de busqueda de abajo"} isPlaying={playing} handlePlaying={handlePlaying} handlePlayingSongId={handlePlayingSongId} playingSongId={playingSongId} deleteSong={handleDeleteSong} handleSetPlaying={handleSetPlaying}></Reproductor>
+      <Reproductor imageUrl={"https://i.pinimg.com/originals/44/5f/1a/445f1ab89041d998d9fa937ad7f9efa3.gif"} songTitle={"Busca una cancion"} songUrl={""} songArtist={"En la barra de busqueda de abajo"} isPlaying={playing} handlePlaying={handlePlaying} handlePlayingSongId={handlePlayingSongId} playingSongId={playingSongId} deleteSong={handleDeleteSong} handleSetPlaying={handleSetPlaying} searchText={search} searchedSongsArray={searchedSongs}></Reproductor>
       <SearchBar searchText={search} handleSetSearch={handleSetSearch}></SearchBar>
     </>
   } else {
     return (
       <>
-        <Reproductor imageUrl={searchedSongs[playingSongId].album.cover_xl} songTitle={searchedSongs[playingSongId].album.title} songUrl={searchedSongs[playingSongId].preview} songArtist={searchedSongs[playingSongId].artist.name} isPlaying={playing} handlePlaying={handlePlaying} handlePlayingSongId={handlePlayingSongId} playingSongId={playingSongId} deleteSong={handleDeleteSong} handleSetPlaying={handleSetPlaying}></Reproductor>
+        <Reproductor imageUrl={searchedSongs[playingSongId].album.cover_xl} songTitle={searchedSongs[playingSongId].album.title} songUrl={searchedSongs[playingSongId].preview} songArtist={searchedSongs[playingSongId].artist.name} isPlaying={playing} handlePlaying={handlePlaying} handlePlayingSongId={handlePlayingSongId} playingSongId={playingSongId} deleteSong={handleDeleteSong} handleSetPlaying={handleSetPlaying} searchText={search} searchedSongsArray={searchedSongs}></Reproductor>
         <SearchBar searchText={search} handleSetSearch={handleSetSearch}></SearchBar>
       </>
     )

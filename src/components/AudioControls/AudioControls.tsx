@@ -35,48 +35,53 @@ export const AudioControls = ({ isPlaying, handlePlaying, handlePlayingSongId, d
 
     if (isPlaying) {
         return <>
-            <div id='buttonControlers' >
-                <button onClick={(e) => {
-                    handleNextPreviusButtons(e, "previous")
-                }}>
-                    <img src={fastRewind} alt="" />
-                </button>
+            <div id='globalContainer'>
+                <div id='buttonControlers' >
+                    <button id='previousButton' onClick={(e) => {
+                        handleNextPreviusButtons(e, "previous")
+                    }}>
+                        <img src={fastRewind} alt="" />
+                    </button>
 
-                <button id='playButton' onClick={handlePlayButton}>
-                    <img src={pause} alt="" />
-                </button>
+                    <button id='playButton' onClick={handlePlayButton}>
+                        <img src={pause} alt="" />
+                    </button>
 
-                <button onClick={(e) => {
-                    handleNextPreviusButtons(e, "next")
-                }}>
-                    <img src={fastFoward} alt="" />
-                </button>
+                    <button id='nextButton' onClick={(e) => {
+                        handleNextPreviusButtons(e, "next")
+                    }}>
+                        <img src={fastFoward} alt="" />
+                    </button>
+                </div>
 
-                <button onClick={handleDeleteSong}>
+                <button id='deleteButton' onClick={handleDeleteSong}>
                     <img src={trash} alt="" />
                 </button>
             </div>
         </>
     } else {
         return <>
-            <div id='buttonControlers'>
-                <button onClick={(e) => {
-                    handleNextPreviusButtons(e, "previous")
-                }}>
-                    <img src={fastRewind} alt="" />
-                </button>
+            <div id='globalContainer'>
+                <div id='buttonControlers'>
+                    <button id='previousButton' onClick={(e) => {
+                        handleNextPreviusButtons(e, "previous")
+                    }}>
+                        <img src={fastRewind} alt="" />
+                    </button>
 
-                <button id='playButton' onClick={handlePlayButton}>
-                    <img src={play} alt="" />
-                </button>
+                    <button id='playButton' onClick={handlePlayButton}>
+                        <img src={play} alt="" />
+                    </button>
 
-                <button onClick={(e) => {
-                    handleNextPreviusButtons(e, "next")
-                }}>
-                    <img src={fastFoward} alt="" />
-                </button>
+                    <button id='nextButton' onClick={(e) => {
+                        handleNextPreviusButtons(e, "next")
+                    }}>
+                        <img src={fastFoward} alt="" />
+                    </button>
 
-                <button onClick={handleDeleteSong}>
+                </div>
+
+                <button id='deleteButton' onClick={handleDeleteSong}>
                     <img src={trash} alt="" />
                 </button>
             </div>

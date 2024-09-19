@@ -13,12 +13,6 @@ function App() {
 
   const [searchedSongs, setSearchedSongs] = useState<arrayDeezer>([])
 
-  //Intento de quitar la cancion duplicada
-
-  // if (searchedSongs.length !== 0 && searchedSongs.length !== 1) {
-  //   console.log(searchedSongs.splice(searchedSongs.length - 1, 1))
-  // }
-
   const handleSetSearch = (textToSearch: string) => {
     setSearch(textToSearch)
   }
@@ -54,19 +48,29 @@ function App() {
   }
 
   const handleDeleteSong = (songIndex: number) => {
-    console.log("length: ", searchedSongs.length)
+
     if (searchedSongs.length === 1) {
       setSearchedSongs([])
       setSearch("")
-      console.log("Kawabonga")
+
+      console.log("Length 1")
+
+    } else if (searchedSongs.length === 2) {
+      searchedSongs.splice(songIndex + 1, 1)
+
+      const newSearchedSongs = [...searchedSongs]
+
+      setSearchedSongs(newSearchedSongs)
     } else {
+      console.log("Length other", songIndex)
       searchedSongs.splice(songIndex, 1)
 
-      setSearchedSongs(searchedSongs)
+      const newSearchedSongs = [...searchedSongs]
 
-      console.log("length after: ", searchedSongs.length)
+      setSearchedSongs(newSearchedSongs)
     }
   }
+
 
   const handlePlayingSongId = (action: string) => {
     switch (action) {
@@ -122,13 +126,13 @@ function App() {
   if (Object.keys(searchedSongs).length === 0) {
     return <>
       <Reproductor imageUrl={"https://i.pinimg.com/originals/44/5f/1a/445f1ab89041d998d9fa937ad7f9efa3.gif"} songTitle={"Busca una cancion"} songUrl={""} songArtist={"En la barra de busqueda de abajo"} isPlaying={playing} handlePlaying={handlePlaying} handlePlayingSongId={handlePlayingSongId} playingSongId={playingSongId} deleteSong={handleDeleteSong} handleSetPlaying={handleSetPlaying} searchText={search} searchedSongsArray={searchedSongs}></Reproductor>
-      <SearchBar searchText={search} handleSetSearch={handleSetSearch}></SearchBar>
+      <SearchBar handleSetSearch={handleSetSearch}></SearchBar>
     </>
   } else {
     return (
       <>
         <Reproductor imageUrl={searchedSongs[playingSongId].album.cover_xl} songTitle={searchedSongs[playingSongId].album.title} songUrl={searchedSongs[playingSongId].preview} songArtist={searchedSongs[playingSongId].artist.name} isPlaying={playing} handlePlaying={handlePlaying} handlePlayingSongId={handlePlayingSongId} playingSongId={playingSongId} deleteSong={handleDeleteSong} handleSetPlaying={handleSetPlaying} searchText={search} searchedSongsArray={searchedSongs}></Reproductor>
-        <SearchBar searchText={search} handleSetSearch={handleSetSearch}></SearchBar>
+        <SearchBar handleSetSearch={handleSetSearch}></SearchBar>
       </>
     )
   }

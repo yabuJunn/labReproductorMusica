@@ -5,11 +5,10 @@ import search from '../../assets/svg/search.svg'
 import { useCallback, useRef } from 'react'
 
 interface SearchBarProps {
-    searchText: string,
     handleSetSearch: (textToSearch: string) => void
 }
 
-export const SearchBar = ({ searchText, handleSetSearch }: SearchBarProps) => {
+export const SearchBar = ({ handleSetSearch }: SearchBarProps) => {
 
     const searchRef = useRef<HTMLInputElement | null>(null)
 

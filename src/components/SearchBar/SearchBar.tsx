@@ -1,7 +1,8 @@
 import './SearchBar.css'
+import debounce from 'just-debounce-it'
 
 import search from '../../assets/svg/search.svg'
-import { useRef } from 'react'
+import { useCallback, useRef } from 'react'
 
 interface SearchBarProps {
     searchText: string,
@@ -14,10 +15,11 @@ export const SearchBar = ({ searchText, handleSetSearch }: SearchBarProps) => {
 
     const handleChange: React.ChangeEventHandler<HTMLInputElement> = async (e) => {
         e.preventDefault()
-        setTimeout(() => {
-            handleSetSearch(e.target.value)
-        }, 2500);
+        debounceSearch(e.target.value)
     }
+
+    const debounceSearch = useCallback(
+        debounce((value: string) => handleSetSearch(value), 1000), [])
 
 
     return <>

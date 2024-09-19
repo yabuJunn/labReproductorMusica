@@ -116,6 +116,7 @@ function App() {
     }
   }
 
+  
   useMemo(async () => { await handleFetch(search, handleSetData, handleSearchedSongs) }, [search])
 
   console.log("Playing song id: ", playingSongId)
@@ -124,7 +125,7 @@ function App() {
 
   console.log("Searched text: ", search)
 
-  if (Object.keys(searchedSongs).length === 0 || search === "") {
+  if (Object.keys(searchedSongs).length === 0) {
     return <>
       <Reproductor imageUrl={"https://i.pinimg.com/originals/44/5f/1a/445f1ab89041d998d9fa937ad7f9efa3.gif"} songTitle={"Busca una cancion"} songUrl={""} songArtist={"En la barra de busqueda de abajo"} isPlaying={playing} handlePlaying={handlePlaying} handlePlayingSongId={handlePlayingSongId} playingSongId={playingSongId} deleteSong={handleDeleteSong} handleSetPlaying={handleSetPlaying} searchText={search} searchedSongsArray={searchedSongs}></Reproductor>
       <SearchBar searchText={search} handleSetSearch={handleSetSearch}></SearchBar>

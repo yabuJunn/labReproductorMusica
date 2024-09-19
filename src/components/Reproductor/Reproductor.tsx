@@ -22,7 +22,7 @@ interface ReproductorProps {
 
 export const Reproductor = ({ imageUrl, songTitle, songArtist, songUrl, isPlaying, handlePlaying, handlePlayingSongId, playingSongId, deleteSong, handleSetPlaying, searchText, searchedSongsArray }: ReproductorProps) => {
 
-    if (Object.keys(searchedSongsArray).length === 0 || searchText === "") {
+    if (Object.keys(searchedSongsArray).length === 0) {
         return <>
             <div id="reproductor">
                 <div id='reproductorImagen'>
@@ -44,6 +44,7 @@ export const Reproductor = ({ imageUrl, songTitle, songArtist, songUrl, isPlayin
             <div id='reproductorTexto'>
                 <h1>{songTitle}</h1>
                 <h2>{songArtist}</h2>
+                <p id='songsInQue'>{`There is ${searchedSongsArray.length} on queue, this is song number ${playingSongId + 1}`}</p>
                 <AudioReproductor songUrl={songUrl} isPlaying={isPlaying} playingSongId={playingSongId} ></AudioReproductor>
                 <AudioControls handlePlaying={handlePlaying} isPlaying={isPlaying} handlePlayingSongId={handlePlayingSongId} deleteSong={deleteSong} playingSongId={playingSongId} handleSetPlaying={handleSetPlaying}></AudioControls>
             </div>

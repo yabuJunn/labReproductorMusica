@@ -57,6 +57,8 @@ function App() {
         newSong
       ]
     })
+
+    setPlayingSongId(searchedSongs.length)
   }
 
   const handleDeleteSong = (songIndex: number) => {
@@ -116,7 +118,7 @@ function App() {
     }
   }
 
-  
+
   useMemo(async () => { await handleFetch(search, handleSetData, handleSearchedSongs) }, [search])
 
   console.log("Playing song id: ", playingSongId)
